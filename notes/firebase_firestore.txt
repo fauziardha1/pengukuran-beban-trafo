@@ -1,0 +1,36 @@
+Database dengan Firebase Cloud_FireStore
+
+1. Buat project di firebase console,
+2. Daftarkan aplikasi androidnya,
+3. Buat database di FireStore, dengan mode status
+4. Pada file android/app/build.gradle ubah minimum sdk jadi 21
+5. Persiapkan tampilan sderhana
+6. buat class DatabaseService di file database_service.dart 
+```dart 
+
+    class DatabaseService {
+       static CollectionReference producCollection = Firebase.instance.collection('products'); 
+
+       static Future<void> createOrUpdateProduct(String id,{String name, int price}) async{
+           await producCollection.document("1").setData({
+               "nama" : name,
+               "harga": price,
+           });
+
+       }
+
+       static Future<DocumentSnapshot> getProduct(String id) async{
+           return await producCollection.document(id).get();
+
+       }
+
+       static Future<void> deleteProduct(String id) async{
+           await producCollection.document(id).delete();
+       }
+    }
+
+```
+
+6. panggil static methodnya pada onpress atau bagian program lainya
+7. Selesai.
+

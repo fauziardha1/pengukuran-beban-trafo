@@ -1,0 +1,22 @@
+
+Di class AuthServices : 
+    buat static method signUp
+     ```dart 
+        static Future<User> signUp(String email, String password) async {
+            try{
+                AuthResult result = await _auth.createUserWithemailAndPassowrd(
+                    email: email, password: password);
+
+                    User firebaseUser = result.user;
+
+                
+            }
+             catch(e){
+                 print(e.toString());
+                 return null;
+             }
+        }
+     ```
+
+Persiapkan halaman Signup dan halaman login
+pada buttonnya panggil static method untuk login/signUp dan jalankan

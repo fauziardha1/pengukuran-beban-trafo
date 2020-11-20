@@ -1,0 +1,102 @@
+# Anonymous Login Using Firebase 
+ `berlaku online untuk login , namun offline jika sudah login`
+```dart 
+    status : Success 
+```
+
+1. buat project di firebase
+2. daftarkan aplikasi android 
+    ke flutter,
+    android/app/src/prifile/manifest.xml
+    copy nama packagenya
+    next register
+    download file google services.json
+    pindahkah filenya ke android/app 
+
+
+    tambahkan "classpath jbla..." ke android/build.gradle tepatnya di bagian dpenencies
+    tambahkan "apli plugin ..." ke app/build.gradle 
+
+    
+    next continue to console,
+    pilih authenthication
+
+
+2. sekarang dengan anonymous di firebase console, 
+   mehode anonymus aktifkan
+
+4. ke Flutter project
+,yaml file tambahkan,  
+    firebase_auth,
+    provider,
+    firebase_core,
+
+
+5. persiapkan tampilan dengan wrapper
+>wrapper.dart 
+>loginpage.dart
+>mainpage.dart
+
+
+6. buat file file auth_services.dart : 
+    import firebase_auth
+    buat kelas auth_services :    
+        ```dart 
+            static Firebase _auth = Firebase.instance;
+
+            static Future<FirebaseUser> SigntinAnonnympus() async{
+
+                try{
+                    AuthResult reuslt  = await _autho.signInAnonymously();
+                firebaseUser firebaseUser = reuslt.user;
+
+                return firebaseUser;
+                }
+                catch(e){
+                    print(e.toString());
+                    return null;
+                }
+            }
+
+            static FUture<void> signOut() async{
+                _auth.signOut();
+            }
+
+            static Stream<FirebaseUser> get firebaseUserStream => _auth.onAuthStateChanged;
+        ```
+
+
+7. pada main.dart
+    inisialisasai Firebase : di 
+    ```dart 
+        main(){
+            WidgetsFlutterBinding.ensureInitialized();
+            await Firebase.initializeApp();
+            runApp(MyApp());
+        }
+    ```
+
+    >di MyApp return StreamProvider.value() : 
+        StreamProvider.value(
+            value: AuthServices.firebaseUserStream,
+            child: MaterialApp()
+        );
+    
+    >diwrappper paanggil firebaseUser : 
+        ```dart 
+        User firebaseUser = AuthServices.firebaseUserStream;
+        return firebaesUser == null ? LoginPage(): HomePage();
+        ```
+    
+    >di HomePage.dart
+        buat button signOut : 
+            ```dart 
+            IconButton(icon:Icon(Icons.logout),onPress:AuthServices.signOut ),
+            ```
+
+8. Selesai 
+
+
+
+
+ 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "583882616320",
+    "firebase_url": "https://beban-trafo-b676c.firebaseio.com",
+    "project_id": "beban-trafo-b676c",
+    "storage_bucket": "beban-trafo-b676c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583882616320:android:e2a8caa3362ecf7146b2e5",
+        "android_client_info": {
+          "package_name": "com.example.beban_trafo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "583882616320-ash9mu2or3ukus20nvh9m1jutplkml58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx2mNJ32fVhnhqrTsyaUx75m9Q471FyAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "583882616320-ash9mu2or3ukus20nvh9m1jutplkml58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
