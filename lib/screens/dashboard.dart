@@ -1,8 +1,10 @@
 import 'package:beban_trafo/functions/auth_services.dart';
 import 'package:beban_trafo/screens/history.dart';
 import 'package:beban_trafo/screens/home.dart';
+import 'package:beban_trafo/screens/tools/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -10,6 +12,19 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  SharedPreferences memory;
+  setGlobalEmail() async {
+    memory = await SharedPreferences.getInstance();
+    globalEmail = memory.getString("email");
+    print("Dasboard global Email : $globalEmail");
+  }
+
+  @override
+  void initState() {
+    setGlobalEmail();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double tinggiLayar =
@@ -135,7 +150,12 @@ class _DashboardState extends State<Dashboard> {
       ),
       actions: [
         TextButton(
-          onPressed: AuthServices.signOut,
+          onPressed: () {
+            AuthServices.signOut();
+            memory.remove("email");
+            memory.remove("nama");
+            memory.remove("name");
+          },
           child: Text("Log Out",
               style: TextStyle(
                 color: Colors.white,

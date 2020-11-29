@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:beban_trafo/functions/database_services.dart';
 import 'package:beban_trafo/screens/tools/constants.dart';
+import 'package:beban_trafo/screens/tools/internet_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -172,14 +173,36 @@ class _InputBebanPhaseState extends State<InputBebanPhase> {
                     DatabaseServices(name: globalNamaULP);
                 firebase.createAndUpdateProduct(globalNamaGardu);
 
-                String dataToSave = json.encode(globalData);
-                List<String> oldPref = pref.getStringList("local") ?? [];
-                oldPref.insert(0, dataToSave);
-                pref.setStringList("local", oldPref);
+                // internetConnection().then((value) async {
+                //   if (!value) {
+                //     // get the globaldata   and save it in shared pref
+                //     String dataToSave = json.encode(globalData);
+                //     // List<String> oldPref =
+                //     //     pref.getStringList("localHistory") ?? [];
+                //     // oldPref.insert(0, dataToSave);
+                //     // pref.setStringList("localHistory", oldPref);
+                //     // print(" offline beban phase : ${pref.get("localHistory")}");
+
+                //     globalHistory.insert(0, dataToSave);
+
+                //     globalNamaULP = null;
+                //     globalNamaGardu = null;
+                //     globalStafLapangan = null;
+                //     globalWaktuPengukuran = null;
+                //     globalBebanInduk = {};
+                //     globalBebanPhase = {};
+                //     globalBebanRute = [];
+                //     globalEmail = null;
+                //     // end of save to sharedPref
+                //   } else {
+                //     globalHistory = [];
+                //   }
+                // });
 
                 SweetAlert.show(context,
                     title: "Berhasil",
                     subtitle: "Data hasil pengukuran berhasil terkirim",
+                    // ignore: missing_return
                     onPress: (bool isConfirm) {
                   Navigator.pop(context);
                   Navigator.pop(context);

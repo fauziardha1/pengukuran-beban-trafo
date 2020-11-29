@@ -1,6 +1,9 @@
 import 'package:beban_trafo/functions/auth_services.dart';
+import 'package:beban_trafo/screens/tools/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sweetalert/sweetalert.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -86,6 +89,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: SweetAlertStyle.error,
                   showCancelButton: false,
                 );
+              } else {
+                globalEmail = emailController.text;
+
+                CollectionReference users =
+                    FirebaseFirestore.instance.collection("users");
+                var temp = await users.doc(emailController.text).get();
+                SharedPreferences memory =
+                    await SharedPreferences.getInstance();
+
+                memory.setString("nama", temp.data()["nama"]);
+                memory.setString("email", emailController.text);
+
+                globalStafLapangan = temp.data()["nama"];
+                print("Login Memory :$globalStafLapangan ");
               }
             },
             child: Text("Login",

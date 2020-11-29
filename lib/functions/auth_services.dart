@@ -29,8 +29,9 @@ class AuthServices {
       );
       User firebaseUser = result.user;
       document = await users.doc(email).get();
+
       SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setString("name", document.get("nama"));
+      pref.setString("name", document.data()["nama"]);
       globalStafLapangan = document.get("nama");
 
       return firebaseUser;

@@ -24,9 +24,11 @@ dependencies:
   flutter:
     sdk: flutter
   cloud_firestore: ^0.14.2
+  connectivity: ^2.0.2
   cupertino_icons: ^1.0.0
   firebase_auth: ^0.18.2
   firebase_core: ^0.5.1
+  hive: ^1.4.4+1
   provider: ^4.3.2+2
   shared_preferences: ^0.5.12+4
   sweetalert: ^0.0.1
